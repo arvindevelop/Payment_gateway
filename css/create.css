@@ -3,20 +3,15 @@ button,input {
     font-weight: 700;
     letter-spacing: 1.4px;
   }
-  .background {
-    width: 100%;
-    display: flex;
-  }
   
-  .container {
-    flex: 0 1 700px;
-    width: 100%;
-    margin: auto;
+  .container1 {
+    margin-left:200px;
+    margin-right:200px;
     padding: 10px;
   }
   
   .screen {
-    position: relative;
+    /*position: relative;*/
     background: #d9d9d9;
     border-radius: 15px;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, .25);
@@ -101,9 +96,9 @@ button,input {
     *{
       letter-spacing:1px;
     }
-    .container{
-      margin-left: 20px;
-      margin-right: 20px;
+    .container1{
+      margin-left: 0;
+      margin-right: 0;
       margin-bottom: 40px;
     }
     .screen-body {
