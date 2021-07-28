@@ -1,15 +1,15 @@
 <?php
 	//development connection
-	//$servername = "localhost";
-	//$username = "root";
-	//$password = "";
-	//$dbname = "my_bank";
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "my_bank";
 
 	//remote database connection
-	$servername = "remotemysql.com";
-	$username = "mP0ewlSNqi";
-	$password = "QgNLaNnC6A";
-	$dbname = "mP0ewlSNqi";
+	//$servername = "remotemysql.com";
+	//$username = "mP0ewlSNqi";
+	//$password = "QgNLaNnC6A";
+	//$dbname = "mP0ewlSNqi";
 
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 

@@ -3,6 +3,7 @@ include 'config.php';
 
 if(isset($_POST['submit']))
 {
+    //session_start();
     $from = $_GET['id'];
     $to = $_POST['to'];
     $amount = $_POST['amount'];
@@ -62,14 +63,22 @@ if(isset($_POST['submit']))
                 
                 $sender = $sql1['name'];
                 $receiver = $sql2['name'];
-                $sql = "INSERT INTO transaction(`sender`, `receiver`, `balance`) VALUES ('$sender','$receiver','$amount')";
+                $sql = "INSERT INTO transaction(`id`, `sender`, `receiver`, `balance`) VALUES ('$from','$sender','$receiver','$amount')";
                 $query=mysqli_query($conn,$sql);
 
                 if($query){
-                     echo "<script> alert('Transaction Successful');
-                                     window.location='transactionhistory.php';
-                           </script>";
                     
+                    $_SESSION['logged_in'] = 'true';
+                    
+                    
+                    echo "<script> alert('Transaction Successfully');
+                    window.location='selecteduserdetail.php?id=$from';
+                    </script>";
+                    
+                }
+                else
+                {
+                    echo "error";
                 }
 
                 $newbalance= 0;
@@ -107,14 +116,44 @@ if(isset($_POST['submit']))
 
 <body style="background-color : #E59866 ;">
  
-<?php
-  include 'navbar.php';
-?>
+    <!-- navbar --> 
+    <nav class="navbar navbar-expand-md " style="background-color : grey;">
+        <a class="navbar-brand" href="index.php" style="color : #FFCD00;font-weight:bold;font-size:largest"><b>MY BANK</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php" style="color : white;"><b>Home</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color : white;"><b><?php
+                        session_start();
 
+                        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true')
+                        {
+                            $name = $_SESSION['name'];
+                            echo  $name ;
+                        }
+                        else
+                        {
+                            ?>
+                            <a href="#">Log out</a>
+                        <?php
+                        }
+                        ?></b></a>
+                </li>
+            </div>
+        </nav>
+    <!--navbar end-->
+
+    <!--main container-->
 	<div class="container">
-        <h2 class="text-center pt-4" style="color : indigo;">Transaction</h2>
+        <h2 class="text-center pt-4" style="color : indigo;">Transfer Money</h2>
             <?php
                 include 'config.php';
+                //session_start();
                 $sid=$_GET['id'];
                 $sql = "SELECT * FROM  users where id=$sid";
                 $result=mysqli_query($conn,$sql);
@@ -125,61 +164,112 @@ if(isset($_POST['submit']))
                 $rows=mysqli_fetch_assoc($result);
             ?>
             <form method="post" name="tcredit" class="tabletext" ><br>
-        <div>
-            <table class="table table-striped table-condensed table-bordered">
-                <tr style="color : black;">
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Balance</th>
-                </tr>
-                <tr style="color : black;">
-                    <td class="py-2"><?php echo $rows['id'] ?></td>
-                    <td class="py-2"><?php echo $rows['name'] ?></td>
-                    <td class="py-2"><?php echo $rows['email'] ?></td>
-                    <td class="py-2"><?php echo $rows['balance'] ?></td>
-                </tr>
-            </table>
-        </div>
-        <br><br><br>
-        <label style="color : black;"><b>Transfer To:</b></label>
-        <select name="to" class="form-control" required>
-            <option value="" disabled selected>Choose</option>
-            <?php
-                include 'config.php';
-                $sid=$_GET['id'];
-                $sql = "SELECT * FROM users where id!=$sid";
-                $result=mysqli_query($conn,$sql);
-                if(!$result)
-                {
-                    echo "Error ".$sql."<br>".mysqli_error($conn);
-                }
-                while($rows = mysqli_fetch_assoc($result)) {
-            ?>
-                <option class="table" value="<?php echo $rows['id'];?>" >
-                
-                    <?php echo $rows['name'] ;?> (Balance: 
-                    <?php echo $rows['balance'] ;?> ) 
-               
-                </option>
-            <?php 
-                } 
-            ?>
-            <div>
-        </select>
-        <br>
-        <br>
-            <label style="color : black;"><b>Amount:</b></label>
-            <input type="number" class="form-control" name="amount" placeholder="Enter Amount" required >   
-            <br><br>
+                <div>
+                    <table class="table table-striped table-condensed table-bordered">
+                        <tr style="color : black;">
+                            <th class="text-center">User Id</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Balance</th>
+                        </tr>
+                        <tr style="color : black;">
+                            <td class="py-2"><?php echo $rows['id'] ?></td>
+                            <td class="py-2"><?php echo $rows['name'] ?></td>
+                            <td class="py-2"><?php echo $rows['email'] ?></td>
+                            <td class="py-2"><?php echo $rows['balance'] ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <br><br><br>
+                <label style="color : black;"><b>Transfer To:</b></label>
+                <select name="to" class="form-control" required>
+                        <option value="" disabled selected>Choose</option>
+                        <?php
+                            include 'config.php';
+                            //session_start();
+                            $sid=$_GET['id'];
+                            $sql = "SELECT * FROM users where id!=$sid";
+                            $result=mysqli_query($conn,$sql);
+                            if(!$result)
+                            {
+                                echo "Error ".$sql."<br>".mysqli_error($conn);
+                            }
+                            while($rows = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <option class="table" value="<?php echo $rows['id'];?>" >
+                        <?php 
+                            if($rows['email'] == "adminmybank@mybank.com")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                echo $rows['name'] ;?> (
+                                <?php echo $rows['email'] ;?> ) 
+                        </option>
+                        <?php 
+                            }
+                        } 
+                        ?>
+                </select><br><br>
+                <!--<div>-->
+                <label style="color : black;"><b>Amount:</b></label>
+                <input type="number" class="form-control" name="amount" placeholder="Enter Amount" required >   
+                <br><br>
                 <div class="text-center" >
-            <button class="btn mt-3" name="submit" type="submit" id="myBtn" >Transfer</button>
+                    <button class="btn mt-3" name="submit" type="submit" id="myBtn" >Transfer</button>
+                </div>
+            </form>
+
+        <!--particular user transaction detail-->
+        <div class="container">
+            <h2 class="text-center pt-4" style="color : indigo;">Transaction History</h2><br>
+            <div class="table-responsive-sm">
+                <table class="table table-hover table-striped table-condensed table-bordered">
+                    <thead style="color : black;">
+                        <tr>
+                            <th class="text-center">User Id</th>
+                            <th class="text-center">Sender</th>
+                            <th class="text-center">Receiver</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                            include 'config.php';
+                            //session_start();
+                            $sid=$_GET['id'];
+                            $sql ="select * from transaction where id=$sid";
+
+                            $query =mysqli_query($conn, $sql);
+
+                            while($rows = mysqli_fetch_assoc($query))
+                            {
+                        ?>
+
+                            <tr style="color : black;">
+                            <td class="py-2"><?php echo $rows['id']; ?></td>
+                            <td class="py-2"><?php echo $rows['sender']; ?></td>
+                            <td class="py-2"><?php echo $rows['receiver']; ?></td>
+                            <td class="py-2"><?php echo $rows['balance']; ?> </td>
+                            <td class="py-2"><?php echo $rows['datetime']; ?> </td>
+                            </tr>
+                        <?php
+                            }
+
+                        ?>
+                    </tbody>
+                </table>
+
             </div>
-        </form>
+        </div><br><br>
+        <!--transaction detail end-->
+
+        <!--main container end-->
     </div>
-    <footer class="text-center mt-5 py-2">
-            <p>Made by <b>Arvind Kumar Singh<br>&copy 2021 My Bank</p>
-    </footer>
+    <?php include 'footer.php';?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>

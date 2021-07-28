@@ -12,9 +12,26 @@
 
 <body style="background-color : #fab1a0;">
 
-<?php
-  include 'navbar.php';
-?>
+<!-- navbar --> 
+<nav class="navbar navbar-expand-md " style="background-color : grey;">
+      <a class="navbar-brand" href="index.php" style="color : #FFCD00;font-weight:bold;font-size:largest"><b>MY BANK</b></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php" style="color : white;"><b>Home</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="transfermoney.php" style="color : white;"><b>Users Balance</b></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="transactionhistory.php" style="color : white;"><b>Transaction History</b></a>
+              </li>
+          </div>
+       </nav>
+<!--navbar end-->
 
 	<div class="container">
         <h2 class="text-center pt-4" style="color : indigo;">Transaction History</h2>
@@ -50,6 +67,7 @@
             <td class="py-2"><?php echo $rows['receiver']; ?></td>
             <td class="py-2"><?php echo $rows['balance']; ?> </td>
             <td class="py-2"><?php echo $rows['datetime']; ?> </td>
+            </tr>
         <?php
             }
 
@@ -59,9 +77,7 @@
 
     </div>
 </div><br><br>
-<footer class="text-center mt-5 py-2">
-            <p>Made by <b>Arvind Kumar Singh<br>&copy 2021 My Bank</p>
-</footer>
+<?php include 'footer.php';?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
