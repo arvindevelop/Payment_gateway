@@ -3,7 +3,6 @@ include 'config.php';
 
 if(isset($_POST['submit']))
 {
-    //session_start();
     $from = $_GET['id'];
     $to = $_POST['to'];
     $amount = $_POST['amount'];
@@ -91,13 +90,14 @@ if(isset($_POST['submit']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/table.css">
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+    crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
 
     <style type="text/css">
     	
@@ -112,19 +112,22 @@ if(isset($_POST['submit']))
 		}
 
     </style>
+    <title>user detail</title>
 </head>
 
 <body style="background-color : #E59866 ;">
  
     <!-- navbar --> 
-    <nav class="navbar navbar-expand-md " style="background-color : grey;">
-        <a class="navbar-brand" href="index.php" style="color : #FFCD00;font-weight:bold;font-size:largest"><b>MY BANK</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><b style="color:yellow;">MY BANK</b></a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">  </ul>
+            <ul class="navbar-nav">
+            <li class="nav-item">
                     <a class="nav-link" href="index.php" style="color : white;"><b>Home</b></a>
                 </li>
                 <li class="nav-item">
@@ -144,8 +147,10 @@ if(isset($_POST['submit']))
                         }
                         ?></b></a>
                 </li>
-            </div>
-        </nav>
+            </ul>
+        </div>
+    </div>
+</nav>
     <!--navbar end-->
 
     <!--main container-->
@@ -153,7 +158,6 @@ if(isset($_POST['submit']))
         <h2 class="text-center pt-4" style="color : indigo;">Transfer Money</h2>
             <?php
                 include 'config.php';
-                //session_start();
                 $sid=$_GET['id'];
                 $sql = "SELECT * FROM  users where id=$sid";
                 $result=mysqli_query($conn,$sql);
@@ -186,7 +190,6 @@ if(isset($_POST['submit']))
                         <option value="" disabled selected>Choose</option>
                         <?php
                             include 'config.php';
-                            //session_start();
                             $sid=$_GET['id'];
                             $sql = "SELECT * FROM users where id!=$sid";
                             $result=mysqli_query($conn,$sql);
@@ -212,12 +215,11 @@ if(isset($_POST['submit']))
                         } 
                         ?>
                 </select><br><br>
-                <!--<div>-->
                 <label style="color : black;"><b>Amount:</b></label>
                 <input type="number" class="form-control" name="amount" placeholder="Enter Amount" required >   
                 <br><br>
                 <div class="text-center" >
-                    <button class="btn mt-3" name="submit" type="submit" id="myBtn" >Transfer</button>
+                    <button class="btn mt-3 btn-light" name="submit" type="submit" id="myBtn" >Transfer</button>
                 </div>
             </form>
 
@@ -239,7 +241,6 @@ if(isset($_POST['submit']))
                         <?php
 
                             include 'config.php';
-                            //session_start();
                             $sid=$_GET['id'];
                             $sql ="select * from transaction where id=$sid";
 
@@ -269,8 +270,8 @@ if(isset($_POST['submit']))
 
         <!--main container end-->
     </div>
+    <!--footer-->
     <?php include 'footer.php';?>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <!--footer end--> 
 </body>
 </html>
