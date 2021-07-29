@@ -24,7 +24,7 @@
       $result=mysqli_query($conn,$sql);
       if($result){
                 echo "<script> alert('Congrats, your account is created');
-                                window.location='transfermoney.php'; 
+                                window.location='createuser.php'; 
                       </script>";
                       
       }
