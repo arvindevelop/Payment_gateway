@@ -20,14 +20,35 @@
       $email=$_POST['email'];
       $balance=$_POST['balance'];
       $password=$_POST['password'];
-      $sql="insert into users(name,email,balance,password) values('{$name}','{$email}','{$balance}','{$password}')";
-      $result=mysqli_query($conn,$sql);
-      if($result){
-                echo "<script> alert('Congrats, your account is created');
-                                window.location='createuser.php'; 
-                      </script>";
-                      
-      }
+      $sql = "SELECT email FROM users";
+        $result = mysqli_query($conn,$sql);
+        if(!$result)
+        {
+            echo "<h2>There is some error</h2>";
+        }
+        $flag = 0;
+        while($rows = mysqli_fetch_assoc($result)){
+            if($rows['email'] == $email)
+            {
+                $flag = 1;
+                break;
+            }
+        }
+        if($flag)
+        {
+            echo "<script> alert('You  have already registered.');
+                  </script>";
+        }
+        else
+        {
+          $sql="insert into users(name,email,balance,password) values('{$name}','{$email}','{$balance}',''{$password})";
+            $result=mysqli_query($conn,$sql);
+            if($result){
+                    echo "<script> alert('Congrats, your account is created');
+                                   window.location='createuser.php'; 
+                          </script>";           
+            }
+        }
     }
   ?>
 
