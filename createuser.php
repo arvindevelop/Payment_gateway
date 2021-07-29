@@ -42,9 +42,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">  </ul>
             <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.php" style="color : white;"><b>Back to Home</b></a>
+                <a class="nav-link" href="index.php" style="color : white;"><b>Home</b></a>
               </li>
-             
+             <li class="nav-item">
+                <a class="nav-link" href="login.php" style="color : white;"><b>Transfer Money</b></a>
+              </li>
             </ul>
         </div>
     </div>
