@@ -7,7 +7,7 @@ text-align: center;
 padding-top:10px ;
 padding-bottom:4px ;
 ">
-    <p> Copyright &copy 2021-<?php echo date("Y");?><a style="text-decoration:none; color: orangered;" href="#">My Bank</a> All Rights Reserved | Contact Us: +91 7631353674</p>
+    <p> Copyright &copy 2021-<?php echo date("Y");?> <a style="text-decoration:none; color: orangered;" href="#">My Bank</a> All Rights Reserved | Contact Us: +91 7631353674</p>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
