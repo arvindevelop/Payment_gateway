@@ -41,7 +41,7 @@
         }
         else
         {
-          $sql="insert into users(name,email,balance,password) values('{$name}','{$email}','{$balance}',''{$password})";
+          $sql="insert into users(name,email,balance,password) values('{$name}','{$email}','{$balance}','{$password}')";
             $result=mysqli_query($conn,$sql);
             if($result){
                     echo "<script> alert('Congrats, your account is created');
