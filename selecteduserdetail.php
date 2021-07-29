@@ -168,7 +168,7 @@ if(isset($_POST['submit']))
                 $rows=mysqli_fetch_assoc($result);
             ?>
             <form method="post" name="tcredit" class="tabletext" ><br>
-                <div>
+                <div class="table-responsive-sm">
                     <table class="table table-striped table-condensed table-bordered">
                         <tr style="color : black;">
                             <th class="text-center">User Id</th>
