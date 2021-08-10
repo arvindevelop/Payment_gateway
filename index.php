@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <title>TSF BANK</title>
+    <title>MY BANK</title>
   </head>
 
   <body>
